@@ -19,9 +19,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         sceneView.delegate = self
         
-        self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
-        
-        //createPlanets()
+        createPlanets()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,44 +38,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.session.pause()
     }
     
-    // MARK: - ARSCNViewDelegate Delegate Methods
-    
-    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        
-        guard let planeAnchor = anchor as? ARPlaneAnchor else {return}
-        
-        let planeNode = createPlane(with: planeAnchor)
-        
-        node.addChildNode(planeNode)
-    }
-    
-    // MARK: - Helpers
-    
-    func createPlane(with planeAnchor : ARPlaneAnchor) -> SCNNode {
-        
-        let plane = SCNPlane(width: CGFloat(planeAnchor.extent.x), height: CGFloat(planeAnchor.extent.z))
-        
-        let planNode = SCNNode()
-        
-        planNode.position  = SCNVector3(x: planeAnchor.center.x, y: 0, z: planeAnchor.center.z)
-        planNode.transform = SCNMatrix4MakeRotation(-(Float.pi/2), 1, 0, 0)
-        
-        let gridMaterial = SCNMaterial()
-        
-        gridMaterial.diffuse.contents = UIImage(named: "art.scnassets/grid.png")
-        
-        plane.materials = [gridMaterial]
-        
-        planNode.geometry = plane
-        
-        return planNode
-    }
-    
     func createPlanets() {
         
-        let sunObject = SCNSphere(radius: 0.9)
-        let moonObject = SCNSphere(radius: 0.1)
-        let earthObject = SCNSphere(radius: 0.2)
+        let sunObject = SCNSphere(radius: 5)
+        let moonObject = SCNSphere(radius: 0.2)
+        let earthObject = SCNSphere(radius: 1)
         
         let sunMaterial = SCNMaterial()
         let moonMaterial = SCNMaterial()
@@ -95,9 +60,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let moonNode = SCNNode()
         let earthNode = SCNNode()
         
-        sunNode.position = SCNVector3(x: 0, y: 0, z: -2)
-        earthNode.position = SCNVector3(x: 0.5, y: 0.4, z: -1)
-        moonNode.position = SCNVector3(x: 0.6, y: 0.3, z: -0.5)
+        sunNode.position = SCNVector3(x: 0, y: 0, z: -30)
+        moonNode.position = SCNVector3(x: 11.5, y: 0, z: -30)
+        earthNode.position = SCNVector3(x: 10, y: 0, z: -30)
         
         sunNode.geometry = sunObject
         moonNode.geometry = moonObject
