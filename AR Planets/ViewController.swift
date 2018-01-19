@@ -46,9 +46,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         guard let planeAnchor = anchor as? ARPlaneAnchor else {return}
         
-        let planNode = createPlane(with: planeAnchor)
+        let planeNode = createPlane(with: planeAnchor)
         
-        node.addChildNode(planNode)
+        node.addChildNode(planeNode)
     }
     
     // MARK: - Helpers
