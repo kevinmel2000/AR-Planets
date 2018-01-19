@@ -19,7 +19,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         sceneView.delegate = self
         
-        createPlanets()
+        self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
+        
+        //createPlanets()
     }
     
     override func viewWillAppear(_ animated: Bool) {
